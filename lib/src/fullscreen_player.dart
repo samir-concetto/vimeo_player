@@ -85,7 +85,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
     setState(() {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-      SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.bottom]);
     });
 
     super.initState();
@@ -98,8 +99,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
       _controller!.pause();
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-      SystemChrome.setEnabledSystemUIOverlays(
-          [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     });
     Navigator.pop(context, _controller!.value.position.inSeconds);
     return Future.value(true);
@@ -156,9 +157,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                         _controller!.seekTo(Duration(seconds: position!));
                         _seek = false;
                       }
-                      SystemChrome.setEnabledSystemUIOverlays(
-                          [SystemUiOverlay.bottom]);
-
+                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                          overlays: [ SystemUiOverlay.bottom]);
                       //Отрисовка элементов плеера
                       return Stack(
                         children: <Widget>[
@@ -204,11 +204,11 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                 child: Container(
                   width: doubleTapLWidthFS! / 2 - 30,
                   height: doubleTapLHeightFS! - 44,
-                  margin:
-                      EdgeInsets.fromLTRB(0, 0, doubleTapLWidthFS! / 2 + 30, 40),
+                  margin: EdgeInsets.fromLTRB(
+                      0, 0, doubleTapLWidthFS! / 2 + 30, 40),
                   decoration: BoxDecoration(
-                    //color: Colors.red,
-                  ),
+                      //color: Colors.red,
+                      ),
                 ),
                 //Редактируем размер области дабл тапа при показе оверлея.
                 // Сделано для открытия кнопок "Во весь экран" и "Качество"
@@ -241,8 +241,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   margin: EdgeInsets.fromLTRB(doubleTapRWidthFS! / 2 + 45, 0, 0,
                       doubleTapLMarginFS + 20),
                   decoration: BoxDecoration(
-                    //color: Colors.red,
-                  ),
+                      //color: Colors.red,
+                      ),
                 ),
                 //Редактируем размер области дабл тапа при показе оверлея.
                 // Сделано для открытия кнопок "Во весь экран" и "Качество"
@@ -343,7 +343,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                    top: videoHeight! - 80, left: videoWidth! + videoMargin - 50),
+                    top: videoHeight! - 80,
+                    left: videoWidth! + videoMargin - 50),
                 child: IconButton(
                     alignment: AlignmentDirectional.center,
                     icon: Icon(Icons.fullscreen, size: 30.0),
@@ -354,8 +355,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                           DeviceOrientation.portraitDown,
                           DeviceOrientation.portraitUp
                         ]);
-                        SystemChrome.setEnabledSystemUIOverlays(
-                            [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                            overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
                       });
                       Navigator.pop(
                           context, _controller!.value.position.inSeconds);

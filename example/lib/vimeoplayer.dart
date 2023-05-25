@@ -86,8 +86,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
     //На странице видео преимущество за портретной ориентацией
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.initState();
   }
 
@@ -179,8 +179,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               margin: EdgeInsets.fromLTRB(
                   0, 10, doubleTapLWidth / 2 + 30, doubleTapLMargin + 20),
               decoration: BoxDecoration(
-                //color: Colors.red,
-              ),
+                  //color: Colors.red,
+                  ),
             ),
 
             // Изменение размера блоков дабл тапа. Нужно для открытия кнопок
@@ -215,8 +215,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               margin: EdgeInsets.fromLTRB(doubleTapRWidth / 2 + 45,
                   doubleTapRMargin, 0, doubleTapRMargin + 20),
               decoration: BoxDecoration(
-                //color: Colors.red,
-              ),
+                  //color: Colors.red,
+                  ),
             ),
             // Изменение размера блоков дабл тапа. Нужно для открытия кнопок
             // "Во весь экран" и "Качество" при включенном overlay
@@ -318,7 +318,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                    top: videoHeight! - 70, left: videoWidth! + videoMargin - 50),
+                    top: videoHeight! - 70,
+                    left: videoWidth! + videoMargin - 50),
                 child: IconButton(
                     alignment: AlignmentDirectional.center,
                     icon: Icon(Icons.fullscreen, size: 30.0),
@@ -402,7 +403,7 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
     return ValueListenableBuilder(
       valueListenable: _controller!,
       builder: (context, VideoPlayerValue value, child) {
-        if (!value.hasError && value.initialized) {
+        if (!value.hasError && value.isInitialized) {
           return Row(
             children: <Widget>[
               Container(
